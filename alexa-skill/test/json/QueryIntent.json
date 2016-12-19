@@ -1,0 +1,29 @@
+{
+  "session": {
+    "sessionId": "SessionId.2376af64-94b2-40b7-bb4d-fddb2b68c8df",
+    "application": {
+      "applicationId": "amzn1.ask.skill.c5397674-4c85-4561-bce8-2afb2ee984af"
+    },
+    "attributes": {},
+    "user": {
+      "userId": "amzn1.ask.account.AG3POG25UQV2XDGJE47IFFLPRE2UD5OQBYEOOVXZSVYV4UPV4BINXHTEXZ3JT5JUBWOYAQ2BJTR6YC5IGLXJVNR7E6XIIBS4VQK2FUAZZQXXYPHNETTD4MA3KY5CWRGQTCZY6TX4OMVKDZBB4EGL6OL25NAJKQGUZH4X452J45XTE3HOVO2YQNMPKMOLH6DZJNEUJ2HJQF2CQGQ"
+    },
+    "new": true
+  },
+  "request": {
+    "type": "IntentRequest",
+    "requestId": "EdwRequestId.c16d03dc-af54-428b-a667-7b87612fa932",
+    "locale": "en-US",
+    "timestamp": "2016-12-19T03:31:38Z",
+    "intent": {
+      "name": "QueryIntent",
+      "slots": {
+        "Item": {
+          "name": "Item",
+          "value": "temperature"
+        }
+      }
+    }
+  },
+  "version": "1.0"
+}

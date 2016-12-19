@@ -1,0 +1,29 @@
+{
+  "name": "micro-watch",
+  "version": "0.1.0",
+  "description": "An Alexa skill for monitoring FreeRTOS embedded systems",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/MGItkin/FreeRTOS-distributed-monitoring.git"
+  },
+  "keywords": [
+    "FreeRTOS",
+    "alexa",
+    "skill",
+    "embedded"
+  ],
+  "author": "Mason Itkin, Sanjay Agarwal",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/MGItkin/FreeRTOS-distributed-monitoring/issues"
+  },
+  "homepage": "https://github.com/MGItkin/FreeRTOS-distributed-monitoring#readme",
+  "dependencies": {
+    "alexa-sdk": "^1.0.6",
+    "firebase-admin": "^4.0.4"
+  }
+}

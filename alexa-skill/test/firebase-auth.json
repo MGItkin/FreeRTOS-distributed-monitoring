@@ -1,0 +1,12 @@
+{
+  "type": "service_account",
+  "project_id": "freertos-monitoring",
+  "private_key_id": "860e12c060e58e1df532e9fd7ad78947439a1a14",
+  "private_key": "-----BEGIN PRIVATE KEY-----\nMIIEvQIBADANBgkqhkiG9w0BAQEFAASCBKcwggSjAgEAAoIBAQDbvoJFKK2iacer\nv92XYIx0aQ9MRtYcmRD6xBZb1YYQR3/3fnkSBTaO/X5fIewj6HJmhesK4dD7RSh/\nIW52SgrjPP1wYNHsUi/+4YTjHaZF/7c2q7C3aU01pRGvQvPhwdIPMoWfa8ELnYx0\nelEzVhWEzYe9fdi0o9SoF/uQDbsAp9pp0+WruCfm3lPVXN0OI1w9gJq3kJlPKn4q\nbB3moL0f1fK+6rvkX8MGFvR2ll2TKVgkLVMIyzZyx+aS27ix/8fklmu97hkNTp8T\nb1GW63Mu2Ssaeawxkx18+mTHszykcqS5seJDU2wT2DJvDeBNxCsaQxhbrOHxt+Xz\n97nZY3RVAgMBAAECggEAUYmpUPw9IazamFJDaS48L93j/Uuzmzz43fPwz/a1HklJ\npI5bYmJo0johsC8oLlLMUFqU0p7kKriIxFOlZ2MmExfIevCSNHxyrsMDyjpwPj0a\nwMCIfCYoriUoIL5ZPIXs6hK3HmafZS36tiXFB6WDqpmRKrENvkmkWRM9F0DhCOaP\nwXkjFqL+d10V/aIHWKLN1+ttb0lGbRpFHp66Cgn/mpiZPEmd93ZOY6v38wO33A+9\nqqmLyEtApkBZr7/ZJuZTlSQxri2UiXOhOAPCFH7sQbKHQovKgJwigBYyeMFbksTy\ng006YY71i3JI4CeSNWTGENPXJlfOhTFhEqsJehTNaQKBgQDzx8mtln7uh9PwBcfY\ntheGdPKoD3hy016MWWJBLUcMZBGTz9lhvn0mlMnklveEtNSuMZUUXgQU33JuzMdl\nOaKKJGQwDt6cfs31LUk/CsST43i34bmh9Qi+g7TSUhh01fRmGcjkOZum32LgvXIq\nPWyq6QE6g4i3k50nKOhkpiNkdwKBgQDmwkkqa8bzUdK6nEW8qvpQFKGuv7BVlAXc\n4RAAzZqwXolF5BGElQyjHfbOZ7gqlTErR8SUoj1s+faeXYdAmPugy8yt5ltmq5kU\nZU6JtmW7jwQjPvM7sF/6FDFlagFlYEoELNRnjdyqwaEsBdz0cBDOTuyDLqolePMp\nCHQIyDpckwKBgB/uIzRhae7ES7Y8i5iPATXTS5VHsXcYyGGJs5zl2VB+Ku85Yjez\nQ6EyC9+tBm6TYOgQBn7McaxqOArbN6LCkc+WRKkmyXGmCkP60oU3W9gjC0TKhA36\nklKh3aVOq3ViMMjOx8lc4k5RJBpbtgBiW0Fnk4megOHKq+LdMNM+D5SxAoGBAImT\nC0vfNZ2bCqd2w5zX0qQrqLkmT1q2BUjKZWAVNEQyGGUys773nbEiDCLCc2nvyICl\nKO30S+rMm9uOpzQ8AMi8uCp1S8jKRVmDjG9N7xkDCtR4k0rivFW79DciG/L0lSwo\nDfou+YBUMGKunCyfI2XcZ+VNzOLKWS39fDBAL4tBAoGAOMYtTgQd3UglZ/E/FkuX\nSt5iJlcG7XcF/oe/cSeErUymPpeaIaHeJiyMXbZzYQIqV5im7wOJYcB7YK/X8OnF\nyNIjMS3L0FSgKD6nnS383BxxT/1X/8XikxgdhITGOixAVlvSD92Cd5cEvBw6pW18\nAEDo4IIQWu5FGt2mqjGZ+QE=\n-----END PRIVATE KEY-----\n",
+  "client_email": "raspberry-pi@freertos-monitoring.iam.gserviceaccount.com",
+  "client_id": "103043720784847137531",
+  "auth_uri": "https://accounts.google.com/o/oauth2/auth",
+  "token_uri": "https://accounts.google.com/o/oauth2/token",
+  "auth_provider_x509_cert_url": "https://www.googleapis.com/oauth2/v1/certs",
+  "client_x509_cert_url": "https://www.googleapis.com/robot/v1/metadata/x509/raspberry-pi%40freertos-monitoring.iam.gserviceaccount.com"
+}

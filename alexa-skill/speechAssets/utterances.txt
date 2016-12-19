@@ -1,0 +1,24 @@
+QueryIntent what is the current {Item}
+QueryIntent what is the boards {Item}
+QueryIntent what is the board {Item}
+QueryIntent what is the {Item}
+QueryIntent tell me the current {Item}
+QueryIntent tell me the boards {Item}
+QueryIntent tell me the board {Item}
+QueryIntent tell me the {Item}
+QueryIntent please tell me the current {Item}
+QueryIntent please tell me the boards {Item}
+QueryIntent please tell me the board {Item}
+QueryIntent please tell me the {Item}
+QueryIntent can I have the current {Item}
+QueryIntent can I have the boards {Item}
+QueryIntent can I have the board {Item}
+QueryIntent can I have the {Item}
+QueryIntent can I please have the current {Item}
+QueryIntent can I please have the boards {Item}
+QueryIntent can I please have the board {Item}
+QueryIntent can I please have the {Item}
+AMAZON.StartOverIntent start game
+AMAZON.StartOverIntent new game
+AMAZON.StartOverIntent start
+AMAZON.StartOverIntent start new game
