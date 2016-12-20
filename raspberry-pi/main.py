@@ -14,10 +14,10 @@ while 1:
 
     # Clear uartString for fresh data
     uartString = "."
-
+    uartJson = {}
     # Wait indefinitely for new serial data
     while uartString[0] is not '{':
-      uartString = ser.readline() 
+      uartString = ser.readline(None)
 
     # Parse uartString to json object
     uartJson = json.loads(uartString)
@@ -30,7 +30,14 @@ while 1:
     
     # update send json in fireBase
     result = requests.put(firebase_url + '/Data.json', data=json.dumps(uartJson))
-    print 'Data Update Successful. result: ' + str(result.status_code) + ',' + result.text
+    if result.status_code is 200:
+      print 'Data Update Successful. result: ' + str(result.status_code) + ',' + result.text
+    else:
+      print 'fireBase Data send failed with' + str(result.status_code) + ',' + result.text
 
   except IOError:
-    print('MicroWatch ERROR: Exception in main loop.')
+    print('MicroWatch IOError: Serial data could not be read!\n')
+
+  except ValueError:
+    print('MicroWatch ValueError: Serial data not parsed to json!')
+    print('  Likely, bad serial data was read. retrying on next data recieved...\n')

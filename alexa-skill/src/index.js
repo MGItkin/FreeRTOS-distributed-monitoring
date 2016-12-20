@@ -56,6 +56,11 @@ var handlers = {
                 case "memory":
                     speechOutput = "The board is using " + firebaseData.globalUsed + firebaseData.mallocUsed + " out of " + firebaseData.systemAvail + " total memory blocks. Malloc is using " + firebaseData.mallocUsed + " blocks, global space is using " + firebaseData.globalUsed + " blocks and there are " + firebaseData.mallocUsed + " availble malloc blocks.";
                     break;
+                case "switch":
+                    speechOutput = "Switch 1 is: " + firebaseData.sw1 + " Switch 2 is: " + firebaseData.sw2 + " Switch 3 is: " + firebaseData.sw3 + " and Switch 4 is: " + firebaseData.sw4 + ". ";
+                    break;
+
+                
                 
                 default:
                     speechOutput = null;

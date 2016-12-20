@@ -26,9 +26,31 @@
 /*
  * Final Project Tasks
  */
+dist_monitoring_data_fresh_task::dist_monitoring_data_fresh_task(uint8_t priority) :
+		scheduler_task("dm_data_fresh", 2048, priority) {
+}
+bool dist_monitoring_data_fresh_task::init(void){
+	return true;
+}
+
+bool dist_monitoring_data_fresh_task::run(void* p){
+	sensorData sensor;
+	pinData pin;
+	osData os;
+	xQueueReceive(getSharedObject(DistMonitoringSensorQueueId), &sensor, portMAX_DELAY);
+	xQueueReceive(getSharedObject(DistMonitoringPinQueueId), &pin, portMAX_DELAY);
+	xQueueReceive(getSharedObject(DistMonitoringOsQueueId), &os, portMAX_DELAY);
+
+	// data collection refreshed every 50 ms
+	// NOTE: that is needed specifically for OS data collection.
+	//       with no delay, OS data collection took around 48% CPU utilization
+	vTaskDelay(50);
+
+	return true;
+}
 
 dist_monitoring_consumer_task::dist_monitoring_consumer_task(uint8_t priority) :
-		scheduler_task("dist_monitoring_consumer_task", 2048, priority) {
+		scheduler_task("dm_consumer", 3048, priority) {
 }
 
 bool dist_monitoring_consumer_task::init(void) {
@@ -43,66 +65,44 @@ bool dist_monitoring_consumer_task::run(void* p) {
 	xQueueReceive(getSharedObject(DistMonitoringPinQueueId), &pin, portMAX_DELAY);
 	xQueueReceive(getSharedObject(DistMonitoringOsQueueId), &os, portMAX_DELAY);
 
-	printf("---------------------------------------------\n");
-	vTaskDelay(100);
-	printf("temp: %0.2f\n", sensor.temp);
-	vTaskDelay(1000);
-	printf("light: %u%%\n", sensor.light);
-	vTaskDelay(1000);
-	printf("x: %i\n", sensor.x);
-	vTaskDelay(1000);
-	printf("y: %i\n", sensor.y);
-	vTaskDelay(1000);
-	printf("sw1: %i\n", pin.sw1);
-	vTaskDelay(1000);
-	printf("sw2: %i\n", pin.sw2);
-	vTaskDelay(1000);
-	printf("sw3: %i\n", pin.sw3);
-	vTaskDelay(1000);
-	printf("sw4: %i\n", pin.sw4);
-	vTaskDelay(1000);
+	// Parse received queue data to a single json string
+	char sensorBuffer[65];
+	char pinBuffer[65];
+	char osBuffer[100];
+	char taskBuffer[200]; // additional buffer for the top three tasks
+	char uart3Buffer[430];
+	sprintf(sensorBuffer, "\"temp\": %0.2f, \"light\": %u, \"x\": %i, \"y\": %i, \"z\": %i, ", sensor.temp, sensor.light, sensor.x, sensor.y, sensor.z);
+	sprintf(pinBuffer, "\"sw\": [%i, %i,  %i,  %i], ", pin.sw1, pin.sw2, pin.sw3, pin.sw4);
+	sprintf(osBuffer, "\"mem\": {\"globalUsed\": %5d, \"mallocUsed\": %5d, \"mallocAvail\": %5d, \"systemAvail\": %5d }, ", os.globalUsed, os.mallocUsed, os.mallocAvail, os.systemAvail);
+	sprintf(taskBuffer, "\"task\": [{\"name\": \"%s\", \"percent\": %2u},{\"name\": \"%s\", \"percent\": %2u},{\"name\": \"%s\", \"percent\": %2u}]", os.taskName[0], os.cpuPercent[0], os.taskName[1], os.cpuPercent[1], os.taskName[2], os.cpuPercent[2]);
+	sprintf(uart3Buffer, "{%s%s%s%s}", sensorBuffer ,pinBuffer, osBuffer, taskBuffer);
 
-	for (unsigned int i = 0; i < os.count; i++) {
-		printf("taskName: %15s\n", os.taskName[i]);
-		vTaskDelay(1000);
-		printf("cpuPercent: %4u\n", os.cpuPercent[i]);
-		vTaskDelay(1000);
-	}
+	// Send json string over Uart3 with a baud rate of 9600
+	Uart3& u3 = Uart3::getInstance();
+	u3.init(9600);
+	u3.putline(uart3Buffer);
 
-	printf("globalUsed: %5d\n", os.globalUsed);
-	vTaskDelay(1000);
-	printf("mallocUsed: %5d\n", os.mallocUsed);
-	vTaskDelay(1000);
-	printf("mallocAvail: %5d\n", os.mallocAvail);
-	vTaskDelay(1000);
-	printf("systemAvail: %5d\n", os.systemAvail);
-	vTaskDelay(1000);
-	printf("---------------------------------------------\n");
+	// Send debug info
+//	printf("Sending json data over Uart3:\n%s\n", uart3Buffer);
+//	printf("---------------------------------------------\n");
 
-
-
-//	Uart3& u3 = Uart3::getInstance();
-//
-//	u3.init(9600); /* Init baud rate */
-//
-//	u3.putline("Hello World\n");
-//
-//	if (u3.isReady()) {
-//		printf("uart3 ready!");
-//	}
-//	uint16_t lightVal;
-//	while (1) {
-//		lightVal = LS.getRawValue();
-//		u3.printf("%d\n", lightVal);
-//		vTaskDelay(100);
-//
-//	}
+	// 2 second timeout between transmissions
+	vTaskDelay(2000);
 
 	return true;
+
+	// TODO: Support reporting for up to 6 tasks:
+//	for (unsigned int i = 0; i < os.count; i++) {
+//		printf("taskName: %15s\n", os.taskName[i]);
+//		vTaskDelay(1000);
+//		printf("cpuPercent: %4lu\n", os.cpuPercent[i]);
+//		vTaskDelay(1000);
+//	}
+
 }
 
 dist_monitoring_sensor_task::dist_monitoring_sensor_task(uint8_t priority) :
-		scheduler_task("dist_monitoring_sensor_task", 2048, priority) {
+		scheduler_task("dm_sensor", 2048, priority) {
 }
 
 bool dist_monitoring_sensor_task::init(void) {
@@ -118,12 +118,13 @@ bool dist_monitoring_sensor_task::run(void* p) {
 	data.light = LS.getPercentValue();
 	data.x = AS.getX();
 	data.y = AS.getY();
+	data.z = AS.getZ();
 	xQueueSend(getSharedObject(DistMonitoringSensorQueueId), &data, portMAX_DELAY);
 	return true;
 }
 
 dist_monitoring_pin_task::dist_monitoring_pin_task(uint8_t priority) :
-		scheduler_task("dist_monitoring_pin_task", 2048, priority) {
+		scheduler_task("dm_pin", 2048, priority) {
 }
 
 bool dist_monitoring_pin_task::init(void) {
@@ -146,7 +147,7 @@ bool dist_monitoring_pin_task::run(void* p) {
 }
 
 dist_monitoring_os_task::dist_monitoring_os_task(uint8_t priority) :
-		scheduler_task("dist_monitoring_os_task", 2048, priority) {
+		scheduler_task("dm_os", 2048, priority) {
 }
 
 bool dist_monitoring_os_task::init(void) {
