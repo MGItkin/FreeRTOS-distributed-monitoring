@@ -18,7 +18,43 @@ QueryIntent can I please have the current {Item}
 QueryIntent can I please have the boards {Item}
 QueryIntent can I please have the board {Item}
 QueryIntent can I please have the {Item}
-AMAZON.StartOverIntent start game
-AMAZON.StartOverIntent new game
-AMAZON.StartOverIntent start
-AMAZON.StartOverIntent start new game
+QueryIntent what is the current {Item} value
+QueryIntent what is the boards {Item} value
+QueryIntent what is the board {Item} value
+QueryIntent what is the {Item} value
+QueryIntent tell me the current {Item} value
+QueryIntent tell me the boards {Item} value
+QueryIntent tell me the board {Item} value
+QueryIntent tell me the {Item} value
+QueryIntent please tell me the current {Item} value
+QueryIntent please tell me the boards {Item} value
+QueryIntent please tell me the board {Item} value
+QueryIntent please tell me the {Item} value
+QueryIntent can I have the current {Item} value
+QueryIntent can I have the boards {Item} value
+QueryIntent can I have the board {Item} value
+QueryIntent can I have the {Item} value
+QueryIntent can I please have the current {Item} value
+QueryIntent can I please have the boards {Item} value
+QueryIntent can I please have the board {Item} value
+QueryIntent can I please have the {Item} value
+QueryIntent what is the current {Item} info
+QueryIntent what is the boards {Item} info
+QueryIntent what is the board {Item} info
+QueryIntent what is the {Item} info
+QueryIntent tell me the current {Item} info
+QueryIntent tell me the boards {Item} info
+QueryIntent tell me the board {Item} info
+QueryIntent tell me the {Item} info
+QueryIntent please tell me the current {Item} info
+QueryIntent please tell me the boards {Item} info
+QueryIntent please tell me the board {Item} info
+QueryIntent please tell me the {Item} info
+QueryIntent can I have the current {Item} info
+QueryIntent can I have the boards {Item} info
+QueryIntent can I have the board {Item} info
+QueryIntent can I have the {Item} info
+QueryIntent can I please have the current {Item} info
+QueryIntent can I please have the boards {Item} info
+QueryIntent can I please have the board {Item} info
+QueryIntent can I please have the {Item} info

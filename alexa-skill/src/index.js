@@ -41,21 +41,22 @@ var handlers = {
         }
         var cardTitle = this.t("DISPLAY_CARD_TITLE", this.t("SKILL_NAME"), itemName);
 
-        // var recipes = this.t("RECIPES");
-        // var recipe = recipes[itemName];
-
-        // Call to FireBase for requested item
+        // Call to FireBase for data object
         dataRef.once('value', function(snapshot) {
             var firebaseData = snapshot.val();
 
             // Switch statement for firebase object
             switch(itemName){
                 case "temperature":
-                    speechOutput = "The board's " + itemName + " is " + firebaseData.temp + " degrees fahrenheit.";
+                    speechOutput = "The board's " + itemName + " sensor reads: " + firebaseData.temp + " degrees fahrenheit.";
                     break;
                 case "light":
-                    speechOutput = "The board's " + itemName + " is " + firebaseData.light + " percent.";
+                    speechOutput = "The board's " + itemName + " sensor reads: " + firebaseData.light + " percent.";
                     break;
+                case "memory":
+                    speechOutput = "The board is using " + firebaseData.globalUsed + firebaseData.mallocUsed + " out of " + firebaseData.systemAvail + " total memory blocks. Malloc is using " + firebaseData.mallocUsed + " blocks, global space is using " + firebaseData.globalUsed + " blocks and there are " + firebaseData.mallocUsed + " availble malloc blocks.";
+                    break;
+                
                 default:
                     speechOutput = null;
                     break;
@@ -106,14 +107,14 @@ var languageStrings = {
     "en-US": {
         "translation": {
             "SKILL_NAME" : "MicroWatch",
-            "WELCOME_MESSAGE": "Welcome to %s. You can request SJOne board info by saying things like, 'what is the current temperature?'... Now, what can I help you with?",
+            "WELCOME_MESSAGE": "Welcome to %s. You can request SJOne board info by saying things like, 'what is the current temperature', or 'what is the current light value'... Now, what can I help you with?",
             "WELCOME_REPROMT": "For a list of accepted commands, just say 'help'.",
             "DISPLAY_CARD_TITLE": "%s  - Value for %s.",
-            "HELP_MESSAGE": "You can ask questions such as, what\'s the recipe, or, you can say exit...Now, what can I help you with?",
-            "HELP_REPROMT": "You can say things like, what\'s the recipe, or you can say exit...Now, what can I help you with?",
+            "HELP_MESSAGE": "You can say things like, 'what is the current temperature'... Or you can invoke the skill directly by saying 'Ask MicroWatch for the current temperature'... Now, what can I help you with?",
+            "HELP_REPROMT": "You can say things like, 'what is the current temperature', or you can say exit... Now, what can I help you with?",
             "STOP_MESSAGE": "Thanks for using %s, Goodbye!",
             "RECIPE_REPEAT_MESSAGE": "Try saying repeat.",
-            "RECIPE_NOT_FOUND_MESSAGE": "I\'m sorry, I currently can't monitor ",
+            "RECIPE_NOT_FOUND_MESSAGE": "I'm sorry, I currently can't monitor ",
             "RECIPE_NOT_FOUND_WITH_ITEM_NAME": "the %s. ",
             "RECIPE_NOT_FOUND_WITHOUT_ITEM_NAME": "that parameter. ",
             "RECIPE_NOT_FOUND_REPROMPT": "What else can I help with?"

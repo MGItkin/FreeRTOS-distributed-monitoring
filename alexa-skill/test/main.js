@@ -79,7 +79,7 @@ sts.assumeRole({
         var queryIntentEvent2 = require('./json/QueryIntent2.json');
 
 
-        switch (1) {
+        switch (0) {
             case 0: 
                 lambda.handler(queryIntentEvent, context());
                 break;

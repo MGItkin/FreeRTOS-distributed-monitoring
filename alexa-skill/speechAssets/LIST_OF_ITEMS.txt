@@ -1,4 +1,4 @@
-cpu
 temp
 temperature
 light
+memory
