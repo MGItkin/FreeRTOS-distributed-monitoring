@@ -45,8 +45,10 @@ var handlers = {
         dataRef.once('value', function(snapshot) {
             var firebaseData = snapshot.val();
 
-            // Switch statement for firebase object
-            switch(itemName){
+            var parsedItemName = parseSimilar(itemName);
+
+            // Button statement for firebase object
+            switch(parsedItemName){
                 case "temperature":
                     speechOutput = "The board's " + itemName + " sensor reads: " + firebaseData.temp + " degrees fahrenheit.";
                     break;
@@ -54,13 +56,20 @@ var handlers = {
                     speechOutput = "The board's " + itemName + " sensor reads: " + firebaseData.light + " percent.";
                     break;
                 case "memory":
-                    speechOutput = "The board is using " + firebaseData.globalUsed + firebaseData.mallocUsed + " out of " + firebaseData.systemAvail + " total memory blocks. Malloc is using " + firebaseData.mallocUsed + " blocks, global space is using " + firebaseData.globalUsed + " blocks and there are " + firebaseData.mallocUsed + " availble malloc blocks.";
+                    speechOutput = "The board is using " + firebaseData.mem.globalUsed + firebaseData.mem.mallocUsed + " out of " + firebaseData.mem.systemAvail + " total memory blocks. Malloc is using " + firebaseData.mem.mallocUsed + " blocks, global space is using " + firebaseData.mem.globalUsed + " blocks and there are " + firebaseData.mem.mallocUsed + " availble malloc blocks.";
                     break;
-                case "switch":
-                    speechOutput = "Switch 1 is: " + firebaseData.sw1 + " Switch 2 is: " + firebaseData.sw2 + " Switch 3 is: " + firebaseData.sw3 + " and Switch 4 is: " + firebaseData.sw4 + ". ";
+                case "button":
+                    speechOutput = "The button press status is as follows: Button 1: " + firebaseData.sw[0] + ", Button 2: " + firebaseData.sw[1] + ", Button 3: " + firebaseData.sw[2] + ", and Button 4: " + firebaseData.sw[3] + ". ";
                     break;
-
-                
+                case "task":
+                    speechOutput = "The top three tasks are: " + firebaseData.task[0].name + ". with " + firebaseData.task[0].percent + " percent, " + firebaseData.task[1].name + ". with " + firebaseData.task[1].percent + " percent, and " + firebaseData.task[2].name + ". with " + firebaseData.task[2].percent + " percent. " 
+                    break;
+                case "accelerometer":
+                        speechOutput = "The accelerometer reads: X: " + firebaseData.x + ". Y: " + firebaseData.y + ". and, Z: " + firebaseData.z + ". ";
+                        break;
+                case "last update time":
+                        speechOutput = "The last update was recieved on <say-as interpret-as=\"date\">" + firebaseData.date + "</say-as> at " + "<say-as interpret-as=\"time\">"+ firebaseData.time.substring(0,5) + "</say-as> . ";
+                    break;
                 
                 default:
                     speechOutput = null;
@@ -126,3 +135,26 @@ var languageStrings = {
         }
     }
 };
+
+function parseSimilar(item){
+    switch(item){
+        case "task usage":
+            item = "task";
+            break;
+        case "cpu usage":
+            item = "task";
+            break;
+        case "cpu":
+            item = "task";
+            break;
+        case "last update":
+            item = "last update time";
+            break;
+        case "accel":
+            item = "accelerometer";
+            break;
+        default:
+            break;
+    }
+    return item
+}

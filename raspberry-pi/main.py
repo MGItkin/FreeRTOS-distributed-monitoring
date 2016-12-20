@@ -24,7 +24,7 @@ while 1:
     
     # Insert the current time & date into the json object 
     time_hhmmss = time.strftime('%H:%M:%S')
-    date_mmddyyyy = time.strftime('%d/%m/%Y')
+    date_mmddyyyy = time.strftime('%m/%d/%Y')
     uartJson['time'] = time_hhmmss
     uartJson['date'] = date_mmddyyyy
     

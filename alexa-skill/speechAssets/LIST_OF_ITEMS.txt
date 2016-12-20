@@ -2,4 +2,13 @@ temp
 temperature
 light
 memory
-switch
+button
+accelerometer
+accel
+task
+tasks
+cpu
+cpu usage
+task usage
+last update
+last update time

@@ -20,7 +20,7 @@
       "slots": {
         "Item": {
           "name": "Item",
-          "value": "memory"
+          "value": "accelerometer"
         }
       }
     }
