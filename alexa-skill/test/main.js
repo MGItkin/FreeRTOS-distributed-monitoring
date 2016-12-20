@@ -76,10 +76,15 @@ sts.assumeRole({
         */
 
         var queryIntentEvent = require('./json/QueryIntent.json');
+        var queryIntentEvent2 = require('./json/QueryIntent2.json');
 
-        switch (0) {
-            case 0: // StartOverIntent1 (before session)
+
+        switch (1) {
+            case 0: 
                 lambda.handler(queryIntentEvent, context());
+                break;
+            case 1: // QueryIntent2 (no parameters)
+                lambda.handler(queryIntentEvent2, context());
                 break;
 
             default:

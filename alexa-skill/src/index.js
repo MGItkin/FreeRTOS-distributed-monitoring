@@ -33,12 +33,12 @@ var handlers = {
         this.emit(':ask', this.attributes['speechOutput'], this.attributes['repromptSpeech'])
     },
     'QueryIntent': function () {
+        var speechOutput
         var itemSlot = this.event.request.intent.slots.Item;
         var itemName; // name of dataRequested
         if (itemSlot && itemSlot.value) {
             itemName = itemSlot.value.toLowerCase();
         }
-        var speechOutput = null;
         var cardTitle = this.t("DISPLAY_CARD_TITLE", this.t("SKILL_NAME"), itemName);
 
         // var recipes = this.t("RECIPES");
@@ -57,6 +57,7 @@ var handlers = {
                     speechOutput = "The board's " + itemName + " is " + firebaseData.light + " percent.";
                     break;
                 default:
+                    speechOutput = null;
                     break;
             }
 
@@ -107,14 +108,14 @@ var languageStrings = {
             "SKILL_NAME" : "MicroWatch",
             "WELCOME_MESSAGE": "Welcome to %s. You can request SJOne board info by saying things like, 'what is the current temperature?'... Now, what can I help you with?",
             "WELCOME_REPROMT": "For a list of accepted commands, just say 'help'.",
-            "DISPLAY_CARD_TITLE": "%s  - Recipe for %s.",
+            "DISPLAY_CARD_TITLE": "%s  - Value for %s.",
             "HELP_MESSAGE": "You can ask questions such as, what\'s the recipe, or, you can say exit...Now, what can I help you with?",
             "HELP_REPROMT": "You can say things like, what\'s the recipe, or you can say exit...Now, what can I help you with?",
             "STOP_MESSAGE": "Thanks for using %s, Goodbye!",
             "RECIPE_REPEAT_MESSAGE": "Try saying repeat.",
-            "RECIPE_NOT_FOUND_MESSAGE": "I\'m sorry, I currently do not know ",
-            "RECIPE_NOT_FOUND_WITH_ITEM_NAME": "the recipe for %s. ",
-            "RECIPE_NOT_FOUND_WITHOUT_ITEM_NAME": "that recipe. ",
+            "RECIPE_NOT_FOUND_MESSAGE": "I\'m sorry, I currently can't monitor ",
+            "RECIPE_NOT_FOUND_WITH_ITEM_NAME": "the %s. ",
+            "RECIPE_NOT_FOUND_WITHOUT_ITEM_NAME": "that parameter. ",
             "RECIPE_NOT_FOUND_REPROMPT": "What else can I help with?"
         }
     }
