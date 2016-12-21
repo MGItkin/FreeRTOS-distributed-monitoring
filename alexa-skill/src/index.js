@@ -53,7 +53,7 @@ var handlers = {
                     speechOutput = "The board's " + itemName + " sensor reads: " + firebaseData.temp + " degrees fahrenheit.";
                     break;
                 case "light":
-                    speechOutput = "The board's " + itemName + " sensor reads: " + firebaseData.light + " percent.";
+                    speechOutput = "The board's " + itemName + " sensor reads: " + firebaseData.light + " lumens.";
                     break;
                 case "memory":
                     speechOutput = "The board is using " + firebaseData.mem.globalUsed + firebaseData.mem.mallocUsed + " out of " + firebaseData.mem.systemAvail + " total memory blocks. Malloc is using " + firebaseData.mem.mallocUsed + " blocks, global space is using " + firebaseData.mem.globalUsed + " blocks and there are " + firebaseData.mem.mallocUsed + " availble malloc blocks.";
@@ -62,7 +62,7 @@ var handlers = {
                     speechOutput = "The button press status is as follows: Button 1: " + firebaseData.sw[0] + ", Button 2: " + firebaseData.sw[1] + ", Button 3: " + firebaseData.sw[2] + ", and Button 4: " + firebaseData.sw[3] + ". ";
                     break;
                 case "task":
-                    speechOutput = "The top three tasks are: " + firebaseData.task[0].name + ". with " + firebaseData.task[0].percent + " percent, " + firebaseData.task[1].name + ". with " + firebaseData.task[1].percent + " percent, and " + firebaseData.task[2].name + ". with " + firebaseData.task[2].percent + " percent. " 
+                    speechOutput = "The top three tasks using the most CPU are as follows: " + firebaseData.task[0].name + ". with " + firebaseData.task[0].percent + " percent... " + firebaseData.task[1].name + ". with " + firebaseData.task[1].percent + " percent... and " + firebaseData.task[2].name + ". with " + firebaseData.task[2].percent + " percent. ";
                     break;
                 case "accelerometer":
                         speechOutput = "The accelerometer reads: X: " + firebaseData.x + ". Y: " + firebaseData.y + ". and, Z: " + firebaseData.z + ". ";
@@ -147,12 +147,22 @@ function parseSimilar(item){
         case "cpu":
             item = "task";
             break;
+        case "tasks":
+            item = "task";
+            break;
+        case "top tasks":
+            item = "task";
+            break;
+        case "top three tasks":
+            item = "task";
+            break;
         case "last update":
             item = "last update time";
             break;
         case "accel":
             item = "accelerometer";
             break;
+            
         default:
             break;
     }
